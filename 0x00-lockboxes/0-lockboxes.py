@@ -14,7 +14,7 @@ def canUnlockAll(boxes):
     while attemp != len(boxes):
         for keys in key_box:
             for key in boxes[keys]:
-                if key not in key_box:
+                if key not in key_box and type(key) is int and key > 0:
                     key_box.append(key)
         attemp += 1
     if len(key_box) == len(boxes):
