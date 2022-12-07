@@ -4,6 +4,11 @@
 
 def canUnlockAll(boxes):
     """Determines if all the boxes can be opened"""
+    if type(boxes) is not list or len(boxes) < 1:
+        return False
+    for box in boxes:
+        if type(box) is not list:
+            return False
     key_box = [0]
     attemp = 0
     while attemp != len(boxes):
