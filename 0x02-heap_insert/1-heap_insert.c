@@ -13,44 +13,44 @@ void swap(heap_t **arg_node, heap_t **arg_child);
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *new;
+	heap_t *new;
 
-    if (*root == NULL)
-    {
-        *root = binary_tree_node(NULL, value);
-        return (*root);
-    }
+	if (*root == NULL)
+	{
+		*root = binary_tree_node(NULL, value);
+		return (*root);
+	}
 
-    if (binary_tree_is_perfect(*root) || !binary_tree_is_perfect((*root)->left))
-    {
-        if ((*root)->left)
-        {
-            new = heap_insert(&((*root)->left), value);
-            swap(root, &((*root)->left));
-            return (new);
-        }
-        else
-        {
-            new = (*root)->left = binary_tree_node(*root, value);
-            swap(root, &((*root)->left));
-            return (new);
-        }
-    }
+	if (binary_tree_is_perfect(*root) || !binary_tree_is_perfect((*root)->left))
+	{
+		if ((*root)->left)
+		{
+			new = heap_insert(&((*root)->left), value);
+			swap(root, &((*root)->left));
+			return (new);
+		}
+		else
+		{
+			new = (*root)->left = binary_tree_node(*root, value);
+			swap(root, &((*root)->left));
+			return (new);
+		}
+	}
 
-    if ((*root)->right)
-    {
-        new = heap_insert(&((*root)->right), value);
-        swap(root, (&(*root)->right));
-        return (new);
-    }
-    else
-    {
-        new = (*root)->right = binary_tree_node(*root, value);
-        swap(root, &((*root)->right));
-        return (new);
-    }
+	if ((*root)->right)
+	{
+		new = heap_insert(&((*root)->right), value);
+		swap(root, (&(*root)->right));
+		return (new);
+	}
+	else
+	{
+		new = (*root)->right = binary_tree_node(*root, value);
+		swap(root, &((*root)->right));
+		return (new);
+	}
 
-    return (NULL);
+	return (NULL);
 }
 
 /**
@@ -113,44 +113,44 @@ int check_leaves(const binary_tree_t *tree, int depth, int level)
  */
 void swap(heap_t **arg_node, heap_t **arg_child)
 {
-    heap_t *node, *child, *node_child, *node_left, *node_right, *parent;
-    int left_right;
+	heap_t *node, *child, *node_child, *node_left, *node_right, *parent;
+	int left_right;
 
-    node = *arg_node, child = *arg_child;
-    if (child->n > node->n)
-    {
-        if (child->left)
-            child->left->parent = node;
-        if (child->right)
-            child->right->parent = node;
-        if (node->left == child)
-            node_child = node->right, left_right = 0;
-        else
-            node_child = node->left, left_right = 1;
-        node_left = child->left, node_right = child->right;
-        if (left_right == 0)
-        {
-            child->right = node_child;
-            if (node_child)
-                node_child->parent = child;
-            child->left = node;
-        }
-        else
-        {
-            child->left = node_child;
-            if (node_child)
-                node_child->parent = child;
-            child->right = node;
-        }
-        if (node->parent)
-        {
-            if (node->parent->left == node)
-                node->parent->left = child;
-            else
-                node->parent->right = child;
-        }
-        parent = node->parent, child->parent = parent;
-        node->parent = child, node->left = node_left;
-        node->right = node_right, *arg_node = child;
-    }
+	node = *arg_node, child = *arg_child;
+	if (child->n > node->n)
+	{
+		if (child->left)
+			child->left->parent = node;
+		if (child->right)
+			child->right->parent = node;
+		if (node->left == child)
+			node_child = node->right, left_right = 0;
+		else
+			node_child = node->left, left_right = 1;
+		node_left = child->left, node_right = child->right;
+		if (left_right == 0)
+		{
+			child->right = node_child;
+			if (node_child)
+				node_child->parent = child;
+			child->left = node;
+		}
+		else
+		{
+			child->left = node_child;
+			if (node_child)
+				node_child->parent = child;
+			child->right = node;
+		}
+		if (node->parent)
+		{
+			if (node->parent->left == node)
+				node->parent->left = child;
+			else
+				node->parent->right = child;
+		}
+		parent = node->parent, child->parent = parent;
+		node->parent = child, node->left = node_left;
+		node->right = node_right, *arg_node = child;
+	}
 }
