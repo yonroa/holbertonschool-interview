@@ -18,7 +18,6 @@ if __name__ == "__main__":
     counter = 1
     size = 0
 
-
     def parse_line(line):
         """Read and grab data"""
         try:
@@ -29,7 +28,6 @@ if __name__ == "__main__":
             return int(parse[-1])
         except Exception:
             return 0
-
 
     def print_stats():
         """Print the stats"""
