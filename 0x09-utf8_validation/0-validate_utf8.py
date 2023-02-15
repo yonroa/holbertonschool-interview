@@ -22,4 +22,7 @@ def validUTF8(data):
             if not (binary_num[0] == '1' and binary_num[1] == '0'):
                 return False
         num_bytes -= 1
-    return True
+    if num_bytes:
+        return False
+    else:
+        return True
