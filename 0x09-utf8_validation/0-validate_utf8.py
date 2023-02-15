@@ -4,6 +4,8 @@
 
 def validUTF8(data):
     """Determines if a given data set represents a valid UTF-8 encoding"""
+    if not data or len(data) == 0:
+        return True
     num_bytes = 0
     for num in data:
         binary_num = format(num, '#010b')[-8:]
