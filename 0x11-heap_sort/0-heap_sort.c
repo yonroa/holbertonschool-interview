@@ -10,16 +10,22 @@ void heap_sort(int *array, size_t size)
 {
 	int i, j;
 
+	if (!size || !array)
+		return;
+
 	if (size < 2)
 		return;
 
-	for (i = size / 2 - 1; i >= 0; i--)
+	for (i = (size / 2) - 1; i >= 0; i--)
 		sift_down(array, size, i, size);
 
-	for (j = size - 1; j >= 0; j--)
+	for (j = size - 1; j > 0; j--)
 	{
-		swap(&array[0], &array[j]);
-		print_array(array, size);
+		if (array[0] >= array[j])
+		{
+			swap(&array[0], &array[j]);
+			print_array(array, size);
+		}
 		sift_down(array, j, 0, size);
 	}
 }
