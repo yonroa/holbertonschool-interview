@@ -1,27 +1,27 @@
 #include "binary_trees.h"
 
 /**
- * height - CHeck the height of a binary tree
+ * _height - CHeck the height of a binary tree
  * @tree: Pointer to the node to measures the height
- * Return: The height of the tree
+ * Return: The height of the tree starting at @node
  */
-static size_t height(const binary_tree_t *tree)
+static size_t _height(const binary_tree_t *tree)
 {
 	size_t height_left;
 	size_t height_right;
 
-	height_left = tree->left ? 1 + height(tree->left) : 0;
-	height_right = tree->right ? 1 + height(tree->right) : 0;
+	height_left = tree->left ? 1 + _height(tree->left) : 0;
+	height_right = tree->right ? 1 + _height(tree->right) : 0;
 	return (height_left > height_right ? height_left : height_right);
 }
 
 /**
- * sorting - binary tree Heapsort
+ * _sorting - binary tree Heapsort
  * @temp: pointer to the heap root
  * Return: pointer to last node
  */
 
-heap_t *sorting(heap_t *temp)
+heap_t *_sorting(heap_t *temp)
 {
 	int aux;
 
@@ -41,18 +41,19 @@ heap_t *sorting(heap_t *temp)
 			temp->right->n = aux;
 			temp = temp->right;
 		}
+
 	}
 	return (temp);
 }
 
 /**
- * preorder - goes through a binary tree using pre-order traversal
+ * _preorder - goes through a binary tree using pre-order traversal
  * @root: pointer root of the tree
  * @node: pointer node in the tree
  * @h: height of tree
  * @l: layer on the tree
  */
-void preorder(heap_t *root, heap_t **node, size_t h, size_t l)
+void _preorder(heap_t *root, heap_t **node, size_t h, size_t l)
 {
 	if (!root)
 		return;
@@ -60,9 +61,9 @@ void preorder(heap_t *root, heap_t **node, size_t h, size_t l)
 		*node = root;
 	l++;
 	if (root->left)
-		preorder(root->left, node, h, l);
+		_preorder(root->left, node, h, l);
 	if (root->right)
-		preorder(root->right, node, h, l);
+		_preorder(root->right, node, h, l);
 }
 
 /**
@@ -86,8 +87,8 @@ int heap_extract(heap_t **root)
 		free(aux);
 		return (value);
 	}
-	preorder(aux, &node, height(aux), 0);
-	aux = sorting(aux);
+	_preorder(aux, &node, _height(aux), 0);
+	aux = _sorting(aux);
 	aux->n = node->n;
 	if (node->parent->right)
 		node->parent->right = NULL;
